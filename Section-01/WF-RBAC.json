@@ -20,6 +20,10 @@
                   "field": "type",
                   "equals": "Microsoft.DocumentDB/*"
                 },
+		     {
+                  "field": "type",
+                  "equals": "Microsoft.DocumentDb/databaseAccounts/*"
+                },
                 {
                   "field": "type",
                   "equals": "Microsoft.DBforMySQL/flexibleServers/*"
@@ -184,6 +188,7 @@
                     "Microsoft.DBforPostgreSQL/servers",
                     "Microsoft.DBforMySQL/flexibleServers",
 		    "Microsoft.DocumentDB",
+		    "Microsoft.DocumentDb/databaseAccounts",
 		    "Microsoft.Authorization/policyAssignments",
                   "Microsoft.ContainerRegistry/registries",
                   "Microsoft.Compute/virtualMachines",
