@@ -16,6 +16,10 @@
                   "field": "type",
                   "equals": "Microsoft.DBforPostgreSQL/servers/*"
                 },
+		 {
+                  "field": "type",
+                  "equals": "Microsoft.DocumentDB/*"
+                },
                 {
                   "field": "type",
                   "equals": "Microsoft.DBforMySQL/flexibleServers/*"
@@ -179,6 +183,7 @@
 		"Microsoft.Resources/subscriptions/resourceGroups/providers",
                     "Microsoft.DBforPostgreSQL/servers",
                     "Microsoft.DBforMySQL/flexibleServers",
+		    "Microsoft.DocumentDB",
 		    "Microsoft.Authorization/policyAssignments",
                   "Microsoft.ContainerRegistry/registries",
                   "Microsoft.Compute/virtualMachines",
