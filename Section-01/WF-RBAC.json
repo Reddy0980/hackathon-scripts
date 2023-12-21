@@ -196,30 +196,34 @@
                 "field": "type",
                 "like": "Microsoft.Authorization/policyAssignments/*"
               },
+                {
+                "field": "type",
+                "like": "Microsoft.Web/staticSites/*"
+              },
               {
                 "field": "type",
                 "in": [
                   "Microsoft.BotServices/botServices",
-		              "Microsoft.Resources/subscriptions/resourceGroups/providers",
+	           "Microsoft.Resources/subscriptions/resourceGroups/providers",
                   "Microsoft.DBforPostgreSQL/servers",
                   "Microsoft.DBforMySQL/flexibleServers",
-		              "Microsoft.DocumentDB",
-		              "Microsoft.DocumentDb/databaseAccounts",
-		              "Microsoft.Authorization/policyAssignments",
+	          "Microsoft.DocumentDB",
+	          "Microsoft.DocumentDb/databaseAccounts",
+	          "Microsoft.Authorization/policyAssignments",
                   "Microsoft.ContainerRegistry/registries",
                   "Microsoft.Compute/virtualMachines",
-		              "Microsoft.Web/hostingEnvironments",
+	          "Microsoft.Web/hostingEnvironments",
                   "Microsoft.Graph/applications",
                   "Microsoft.Graph/servficePrincipals",
                   "Microsoft.OperationalInsights/workspaces",
-		              "Microsoft.Search/searchServices",
+	          "Microsoft.Search/searchServices",
                   "Microsoft.Network/routeTables",
                   "Microsoft.DataFactory/factories",
                   "Microsoft.Network/loadBalancers",
                   "Microsoft.OperationsManagement",
                   "Microsoft.ManagedIdentity/userAssignedIdentities",
                   "Microsoft.Resources/deployments",
-		              "Microsoft.Resources/deployments/validate",
+		  "Microsoft.Resources/deployments/validate",
                   "microsoft.insights/components",
                   "Microsoft.Compute/virtualMachineScaleSets",
                   "Microsoft.Compute/disks",
@@ -228,8 +232,8 @@
                   "Microsoft.Network/networkSecurityGroups",
                   "Microsoft.Network/networkInterfaces",
                   "Microsoft.Compute/virtualMachines/extensions",
-		              "Microsoft.Compute/virtualMachines/configurations/extensions",
-		              "Microsoft.Compute/virtualMachines/loginWithLocalUser/action",
+                  "Microsoft.Compute/virtualMachines/configurations/extensions",
+	          "Microsoft.Compute/virtualMachines/loginWithLocalUser/action",
                   "Microsoft.Databricks/workspaces",
                   "Microsoft.DataFactory/factories",
                   "Microsoft.CognitiveServices/accounts",
@@ -246,7 +250,8 @@
                   "Microsoft.OpenAI/openaiResources",
                   "Microsoft.FunctionApp/functionApps",
                   "Microsoft.Sql/servers/databases",
-                  "Microsoft.MachineLearningServices/workspaces"
+                  "Microsoft.MachineLearningServices/workspaces",
+                  "Microsoft.Web/staticSites"
                 ]
               }
             ]
