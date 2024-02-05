@@ -103,10 +103,6 @@
             "equals": "Microsoft.Storage/storageAccounts"
           },
           {
-            "field": "Microsoft.Storage/accountType",
-            "equals": "BlobStorage"
-          },
-          {
             "field": "Microsoft.Storage/sku",
             "equals": "Standard_LRS"
           },
