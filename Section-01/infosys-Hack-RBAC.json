@@ -53,6 +53,10 @@
                 "equals": "Microsoft.Web/sites/*"
             },
             {
+                  "field": "type",
+                  "equals": "Microsoft.Sql/servers/databases/*"
+                },
+            {
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
@@ -66,7 +70,8 @@
                   "Microsoft.OperationalInsights/workspaces",
                   "Microsoft.Insights/components",
                   "Microsoft.CognitiveServices/accounts",
-                  "Microsoft.Web/sites"
+                  "Microsoft.Web/sites",
+                 "Microsoft.Sql/servers/databases"
               ]
             }
           ]
