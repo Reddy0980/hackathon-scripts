@@ -57,6 +57,10 @@
                   "equals": "Microsoft.Sql/servers/databases/*"
                 },
             {
+                "field": "type",
+                "equals": "Microsoft.Web/serverfarms/*"
+              },
+            {
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
@@ -71,7 +75,8 @@
                   "Microsoft.Insights/components",
                   "Microsoft.CognitiveServices/accounts",
                   "Microsoft.Web/sites",
-                 "Microsoft.Sql/servers/databases"
+                 "Microsoft.Sql/servers/databases",
+                "Microsoft.Web/serverfarms"
               ]
             }
           ]
