@@ -58,8 +58,12 @@
                 },
             {
                 "field": "type",
-                "equals": "Microsoft.Web/serverfarms/*"
+                "equals": "Microsoft.Web/serverfarms/*" 
               },
+             {
+                  "field": "type",
+                  "equals": "Microsoft.Network/networkInterfaces/*"
+                },
             {
               "field": "type",
               "in": [
@@ -76,7 +80,8 @@
                   "Microsoft.CognitiveServices/accounts",
                   "Microsoft.Web/sites",
                  "Microsoft.Sql/servers/databases",
-                "Microsoft.Web/serverfarms"
+                "Microsoft.Web/serverfarms",
+                "Microsoft.Network/networkInterfaces"
               ]
             }
           ]
