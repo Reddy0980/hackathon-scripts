@@ -64,6 +64,10 @@
                   "field": "type",
                   "equals": "Microsoft.Network/privateLinkServices/*"
                 },
+              {
+                  "field": "type",
+                  "equals": "Microsoft.Network/privateEndpoints/*"
+                },            
             {
               "field": "type",
               "in": [
@@ -81,7 +85,8 @@
                  "Microsoft.Sql/servers/databases",
                 "Microsoft.Web/serverfarms",
                 "Microsoft.Network/networkInterfaces",
-                "Microsoft.Network/privateLinkServices"
+                "Microsoft.Network/privateLinkServices",
+                "Microsoft.Network/privateEndpoints"
               ]
             }
           ]
