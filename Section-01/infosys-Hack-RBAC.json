@@ -10,10 +10,6 @@
               },
               {
                 "field": "type",
-                "equals": "Microsoft.Fabric/*"
-              },
-              {
-                "field": "type",
                 "equals": "Microsoft.Compute/virtualMachines/*"
               },
               {
@@ -72,7 +68,6 @@
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
-                  "Microsoft.Fabric",
                   "Microsoft.Compute/virtualMachines",
                   "Microsoft.Storage/storageAccounts",
                   "Microsoft.Sql/servers",
