@@ -67,7 +67,11 @@
               {
                   "field": "type",
                   "equals": "Microsoft.Network/privateEndpoints/*"
-                },            
+                },
+             {
+                  "field": "type",
+                  "equals":  "Microsoft.Databricks/workspaces/*"
+                }, 
             {
               "field": "type",
               "in": [
@@ -86,7 +90,8 @@
                 "Microsoft.Web/serverfarms",
                 "Microsoft.Network/networkInterfaces",
                 "Microsoft.Network/privateLinkServices",
-                "Microsoft.Network/privateEndpoints"
+                "Microsoft.Network/privateEndpoints",
+                "Microsoft.Databricks/workspaces"
               ]
             }
           ]
