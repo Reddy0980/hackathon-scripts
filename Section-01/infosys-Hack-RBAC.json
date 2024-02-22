@@ -138,7 +138,19 @@
             }
           }
         ]
-      }
+      },
+        {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Databricks/workspaces"
+            },
+            {
+              "field": "Microsoft.Databricks/workspaces/sku.name",
+              "notEquals": "standard"
+            }
+          ]
+        }
     ]
   },
   "then": {
