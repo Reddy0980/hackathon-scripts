@@ -73,6 +73,22 @@
                   "equals":  "Microsoft.Databricks/workspaces/*"
                 }, 
             {
+                "field": "type",
+                "equals": "Microsoft.Web/sites/functions/*"
+              },
+            {
+                "field": "type",
+                "like": "Microsoft.insights/*"
+              },
+            {
+                "field": "type",
+                "like": "Microsoft.Search/searchServices/*"
+              },
+            {
+                  "field": "type",
+                  "equals": "Microsoft.BotServices/botServices/*"
+              }, 
+            {
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
@@ -91,7 +107,11 @@
                 "Microsoft.Network/networkInterfaces",
                 "Microsoft.Network/privateLinkServices",
                 "Microsoft.Network/privateEndpoints",
-                "Microsoft.Databricks/workspaces"
+                "Microsoft.Databricks/workspaces",
+                "Microsoft.Web/sites/functions",
+                "Microsoft.insights",
+                "Microsoft.Search/searchServices",
+                "Microsoft.BotServices/botServices"
               ]
             }
           ]
