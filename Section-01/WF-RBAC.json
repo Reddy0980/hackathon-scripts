@@ -30,7 +30,7 @@
                 },
                 {
                   "field": "type",
-                  "equals": "Microsoft.BotServices/botServices"
+                  "equals": "Microsoft.BotServices/botServices/*"
               },    
               {
                 "field": "type",
