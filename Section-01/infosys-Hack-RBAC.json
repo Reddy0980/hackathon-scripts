@@ -89,6 +89,10 @@
                   "equals": "Microsoft.BotServices/botServices/*"
               }, 
             {
+                "field": "type",
+                "equals": "Microsoft.Web/sites/functions/*"
+              },
+            {
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
@@ -111,7 +115,8 @@
                 "Microsoft.Web/sites/functions",
                 "Microsoft.insights",
                 "Microsoft.Search/searchServices",
-                "Microsoft.BotServices/botServices"
+                "Microsoft.BotServices/botServices",
+                "Microsoft.Web/sites/functions"
               ]
             }
           ]
