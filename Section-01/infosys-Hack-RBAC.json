@@ -101,6 +101,10 @@
                   "equals": "Microsoft.Resources/subscriptions/resourcegroups/*"
                 },
             {
+                "field": "type",
+                "equals": "Microsoft.Synapse/workspaces/*"
+              },
+            {
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
@@ -126,7 +130,8 @@
                 "Microsoft.BotServices/botServices",
                 "Microsoft.Web/sites/functions",
                 "Microsoft.Logic/workflows",
-                "Microsoft.Resources/subscriptions/resourcegroups"
+                "Microsoft.Resources/subscriptions/resourcegroups",
+                "Microsoft.Synapse/workspaces"
               ]
             }
           ]
