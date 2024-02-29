@@ -190,6 +190,18 @@
               "notEquals": "standard"
             }
           ]
+        },
+       {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Synapse/workspaces"
+            },
+            {
+              "field": "Microsoft.Synapse/workspaces/sqlPools/sku.name",
+              "notEquals": "DW100"
+            }
+          ]
         }
     ]
   },
