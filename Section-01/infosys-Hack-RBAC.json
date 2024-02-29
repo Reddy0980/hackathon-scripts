@@ -93,6 +93,10 @@
                 "equals": "Microsoft.Web/sites/functions/*"
               },
             {
+                "field": "type",
+                "equals": "Microsoft.Logic/workflows/*"
+              },
+            {
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
@@ -116,7 +120,8 @@
                 "Microsoft.insights",
                 "Microsoft.Search/searchServices",
                 "Microsoft.BotServices/botServices",
-                "Microsoft.Web/sites/functions"
+                "Microsoft.Web/sites/functions",
+                "Microsoft.Logic/workflows"
               ]
             }
           ]
