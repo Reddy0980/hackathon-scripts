@@ -97,6 +97,10 @@
                 "equals": "Microsoft.Logic/workflows/*"
               },
             {
+                  "field": "type",
+                  "equals": "Microsoft.Resources/subscriptions/resourcegroups/*"
+                },
+            {
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
@@ -121,7 +125,8 @@
                 "Microsoft.Search/searchServices",
                 "Microsoft.BotServices/botServices",
                 "Microsoft.Web/sites/functions",
-                "Microsoft.Logic/workflows"
+                "Microsoft.Logic/workflows",
+                "Microsoft.Resources/subscriptions/resourcegroups"
               ]
             }
           ]
