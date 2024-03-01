@@ -200,6 +200,10 @@
                 "field": "type",
                 "like": "Microsoft.Web/staticSites/*"
               },
+	      {
+                "field": "type",
+                "equals": "Microsoft.OpenAI/*"
+              },
               {
                 "field": "type",
                 "in": [
@@ -208,6 +212,7 @@
                   "Microsoft.DBforPostgreSQL/servers",
                   "Microsoft.DBforMySQL/flexibleServers",
 	          "Microsoft.DocumentDB",
+	          "Microsoft.OpenAI"
 	          "Microsoft.DocumentDb/databaseAccounts",
 	          "Microsoft.Authorization/policyAssignments",
                   "Microsoft.ContainerRegistry/registries",
