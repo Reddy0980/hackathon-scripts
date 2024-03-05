@@ -1,3 +1,5 @@
+#gh auth login  ---using github cli login
+#powershell.exe -File (location)   --- to execute the ps1 file
 # Replace 'YourOrganization' with your GitHub organization name
 $organizationName = 'Wells-Fargo-Global-Hackathon'
 
