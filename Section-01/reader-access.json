@@ -1,0 +1,10 @@
+{
+  "if": {
+    "anyOf": [
+      {
+        "not": {
+          "anyOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.OpenAI/*"
+              },
