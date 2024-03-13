@@ -295,16 +295,10 @@
                   "field": "Microsoft.Compute/virtualMachines/sku.name",
                   "in": [
                     "Standard_D4s_v3",
-                    "Standard_D3_v2",
-                    "Standard_DS3_v2",
                     "Standard_DS1_v2",
                     "Standard_D2s_v3",
                     "Standard_D2as_v4",
-                    "Standard_B2s",
-                    "Standard_B1s",
-                    "Standard_B2ms",
-                    "Standard_B1ls",
-                    "Standard_B4ms",
+                    "Standard_DS11_v2",
                     "Standard_D4s_v3"
                   ]
                 }
