@@ -8,6 +8,22 @@
                 "field": "type",
                 "equals": "Microsoft.OpenAI/*"
               },
+                        {
+              "field": "type",
+              "equals": "Microsoft.DBforPostgreSQL/servers/*"
+            },
+            {
+              "field": "type",
+              "equals": "Microsoft.DocumentDB/*"
+            },
+            {
+              "field": "type",
+              "equals": "Microsoft.DocumentDb/databaseAccounts/*"
+            },
+            {
+              "field": "type",
+              "equals": "Microsoft.DBforMySQL/flexibleServers/*"
+            },
               {
                 "field": "type",
                 "equals": "Microsoft.Compute/virtualMachines/*"
@@ -100,6 +116,10 @@
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
+                 "Microsoft.DBforPostgreSQL/servers",
+                "Microsoft.DBforMySQL/flexibleServers",
+                "Microsoft.DocumentDB",
+                "Microsoft.DocumentDb/databaseAccounts",
                   "Microsoft.Compute/virtualMachines",
                   "Microsoft.Storage/storageAccounts",
                   "Microsoft.Sql/servers",
