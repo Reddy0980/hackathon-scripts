@@ -142,7 +142,6 @@
                 "Microsoft.Web/sites/functions",
                 "Microsoft.Logic/workflows",
                 "Microsoft.Resources/subscriptions/resourcegroups",
-                "Microsoft.Synapse/workspaces"
               ]
             }
           ]
