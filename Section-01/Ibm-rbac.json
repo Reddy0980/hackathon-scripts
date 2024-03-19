@@ -40,11 +40,7 @@
                 "field": "type",
                 "equals": "Microsoft.DataFactory/factories/*"
               },
-              {
-                "field": "type",
-                "equals": "Microsoft.MachineLearningServices/workspaces/*"
-              },
-              {
+             {
                 "field": "type",
                 "equals": "Microsoft.Web/sites/*"
             },
@@ -101,10 +97,6 @@
                   "equals": "Microsoft.Resources/subscriptions/resourcegroups/*"
                 },
             {
-                "field": "type",
-                "equals": "Microsoft.Synapse/workspaces/*"
-              },
-            {
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
@@ -112,7 +104,6 @@
                   "Microsoft.Storage/storageAccounts",
                   "Microsoft.Sql/servers",
                   "Microsoft.DataFactory/factories",
-                  "Microsoft.MachineLearningServices/workspaces",
                   "Microsoft.KeyVault/vaults",
                   "Microsoft.OperationalInsights/workspaces",
                   "Microsoft.Insights/components",
