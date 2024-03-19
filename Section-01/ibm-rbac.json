@@ -1,0 +1,199 @@
+{
+  "if": {
+    "anyOf": [
+      {
+        "not": {
+          "anyOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.OpenAI/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.Compute/virtualMachines/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.KeyVault/vaults/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.Insights/components/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.CognitiveServices/accounts/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.OperationalInsights/workspaces/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.Storage/storageAccounts/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.Sql/servers/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.DataFactory/factories/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.MachineLearningServices/workspaces/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.Web/sites/*"
+            },
+            {
+                  "field": "type",
+                  "equals": "Microsoft.Sql/servers/databases/*"
+                },
+            {
+                "field": "type",
+                "equals": "Microsoft.Web/serverfarms/*" 
+              },
+             {
+                  "field": "type",
+                  "equals": "Microsoft.Network/networkInterfaces/*"
+                },
+             {
+                  "field": "type",
+                  "equals": "Microsoft.Network/privateLinkServices/*"
+                },
+              {
+                  "field": "type",
+                  "equals": "Microsoft.Network/privateEndpoints/*"
+                },
+             {
+                  "field": "type",
+                  "equals":  "Microsoft.Databricks/workspaces/*"
+                }, 
+            {
+                "field": "type",
+                "equals": "Microsoft.Web/sites/functions/*"
+              },
+            {
+                "field": "type",
+                "like": "Microsoft.insights/*"
+              },
+            {
+                "field": "type",
+                "like": "Microsoft.Search/searchServices/*"
+              },
+            {
+                  "field": "type",
+                  "equals": "Microsoft.BotServices/botServices/*"
+              }, 
+            {
+                "field": "type",
+                "equals": "Microsoft.Web/sites/functions/*"
+              },
+            {
+                "field": "type",
+                "equals": "Microsoft.Logic/workflows/*"
+              },
+            {
+                  "field": "type",
+                  "equals": "Microsoft.Resources/subscriptions/resourcegroups/*"
+                },
+            {
+                "field": "type",
+                "equals": "Microsoft.Synapse/workspaces/*"
+              },
+            {
+              "field": "type",
+              "in": [
+                "Microsoft.OpenAI",
+                  "Microsoft.Compute/virtualMachines",
+                  "Microsoft.Storage/storageAccounts",
+                  "Microsoft.Sql/servers",
+                  "Microsoft.DataFactory/factories",
+                  "Microsoft.MachineLearningServices/workspaces",
+                  "Microsoft.KeyVault/vaults",
+                  "Microsoft.OperationalInsights/workspaces",
+                  "Microsoft.Insights/components",
+                  "Microsoft.CognitiveServices/accounts",
+                  "Microsoft.Web/sites",
+                 "Microsoft.Sql/servers/databases",
+                "Microsoft.Web/serverfarms",
+                "Microsoft.Network/networkInterfaces",
+                "Microsoft.Network/privateLinkServices",
+                "Microsoft.Network/privateEndpoints",
+                "Microsoft.Databricks/workspaces",
+                "Microsoft.Web/sites/functions",
+                "Microsoft.insights",
+                "Microsoft.Search/searchServices",
+                "Microsoft.BotServices/botServices",
+                "Microsoft.Web/sites/functions",
+                "Microsoft.Logic/workflows",
+                "Microsoft.Resources/subscriptions/resourcegroups",
+                "Microsoft.Synapse/workspaces"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "allOf": [
+          {
+            "source": "action",
+            "equals": "Microsoft.Synapse/workspaces/write"
+          },
+          {
+            "field": "type",
+            "equals": "Microsoft.Synapse/workspaces"
+          },
+          {
+            "source": "action",
+            "equals": "Microsoft.Purview/accounts/write"
+          },
+          {
+            "field": "type",
+            "equals": "Microsoft.Purview/accounts"
+          }
+        ]
+      },
+      {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Compute/virtualMachines"
+          },
+          {
+            "not": {
+              "allOf": [
+                {
+                  "field": "Microsoft.Compute/virtualMachines/sku.name",
+                  "in": [
+                    "Standard_D3_v2",
+                    "Standard_DS1_v2",
+                    "Standard_D2s_v3"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+        {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Databricks/workspaces"
+            },
+            {
+              "field": "Microsoft.Databricks/workspaces/sku.name",
+              "notEquals": "standard"
+            }
+          ]
+        }
+    ]
+  },
+  "then": {
+    "effect": "deny"
+  }
+}
