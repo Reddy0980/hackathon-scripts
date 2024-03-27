@@ -1,0 +1,52 @@
+# Set the Azure subscriptions
+Connect-AzAccount
+
+$subscriptions = @(
+"51c7da09-ac17-4e7a-9113-d69cb693dbd1",
+"c273133b-0056-44e3-901f-a90cb20e5a12",
+"afd712b3-366f-43dc-aa7c-2b4af1da3e5b",
+"c7b7e578-f716-45e3-a1f2-00054dab9900",
+"bbaedca3-91f1-4371-8d16-99f48d81363e",
+"c4126e9b-ed4d-419e-bdb7-3c5f24a83968",
+"bcfaf536-ab8b-4485-aafe-33d92bfab46a",
+"331ff63b-0ee0-4aca-8c6c-8e38b13facc8",
+"b15b2d34-47ff-4716-9137-8df171991763",
+"7a6b3356-e874-4967-91f5-aea9f07daec9"
+
+    # Add the subscription IDs for all 88 subscriptions
+    # ...
+)
+
+# Set the desired regions for resource group creation
+$regions = @(
+    "East US",
+    "East US 2",
+    "Canada East",
+    "North Central US",
+    "France Central"
+)
+
+# Set the common parameters
+$resourceGroupPrefix = "Team-"  # You can customize the prefix as needed
+
+# Loop through each subscription
+foreach ($subscriptionId in $subscriptions) {
+    # Connect to the Azure subscription
+    Set-AzContext -SubscriptionId $subscriptionId
+
+    # Calculate the starting index for the resource groups
+    $startIndex = 151 + ($subscriptions.IndexOf($subscriptionId) * 5)
+
+    # Loop through each region
+    foreach ($index in 1..$regions.Count) {
+        $region = $regions[$index - 1]
+        $resourceGroupName = "$resourceGroupPrefix$($startIndex + ($index - 1))"
+        New-AzResourceGroup -Name $resourceGroupName -Location $region -Force
+        Write-Output "Resource group '$resourceGroupName' created in subscription '$subscriptionId' in region '$region'."
+    }
+
+    # Sleep for 10 seconds before processing the next subscription
+    Start-Sleep -Seconds 10
+}
+
+Write-Output "Resource groups creation completed for all subscriptions."
