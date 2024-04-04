@@ -113,6 +113,10 @@
                   "equals": "Microsoft.Resources/subscriptions/resourcegroups/*"
                 },
             {
+                  "field": "type",
+                  "equals": "Microsoft.MachineLearningServices/workspaces/*"
+                },
+            {
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
@@ -141,6 +145,7 @@
                 "Microsoft.BotServices/botServices",
                 "Microsoft.Web/sites/functions",
                 "Microsoft.Logic/workflows",
+                "Microsoft.MachineLearningServices/workspaces",
                 "Microsoft.Resources/subscriptions/resourcegroups",
               ]
             }
