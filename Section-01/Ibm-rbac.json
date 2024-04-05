@@ -117,6 +117,14 @@
                   "equals": "Microsoft.MachineLearningServices/workspaces/*"
                 },
             {
+                  "field": "type",
+                  "equals": "Microsoft.MachineLearningServices/workspaces/endpoints/*"
+                },
+            {
+                "field": "type",
+                "equals": "Microsoft.Resources/deployments/validate/*"
+              },
+            {
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
@@ -146,6 +154,8 @@
                 "Microsoft.Web/sites/functions",
                 "Microsoft.Logic/workflows",
                 "Microsoft.MachineLearningServices/workspaces",
+                Microsoft.MachineLearningServices/workspaces/endpoints",
+                "Microsoft.Resources/deployments/validate",
                 "Microsoft.Resources/subscriptions/resourcegroups",
               ]
             }
