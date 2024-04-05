@@ -154,7 +154,7 @@
                 "Microsoft.Web/sites/functions",
                 "Microsoft.Logic/workflows",
                 "Microsoft.MachineLearningServices/workspaces",
-                Microsoft.MachineLearningServices/workspaces/endpoints",
+                "Microsoft.MachineLearningServices/workspaces/endpoints",
                 "Microsoft.Resources/deployments/validate",
                 "Microsoft.Resources/subscriptions/resourcegroups",
               ]
