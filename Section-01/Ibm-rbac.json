@@ -125,6 +125,10 @@
                 "equals": "Microsoft.Resources/deployments/validate/*"
               },
             {
+                "field": "type",
+                "equals": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/*"
+              },
+            {
               "field": "type",
               "in": [
                 "Microsoft.OpenAI",
@@ -156,6 +160,7 @@
                 "Microsoft.MachineLearningServices/workspaces",
                 "Microsoft.MachineLearningServices/workspaces/endpoints",
                 "Microsoft.Resources/deployments/validate",
+                "Microsoft.MachineLearningServices/workspaces/onlineEndpoints",
                 "Microsoft.Resources/subscriptions/resourcegroups",
               ]
             }
