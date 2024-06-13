@@ -1,0 +1,84 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "apiProfile": "2020-09-01-hybrid",
+  "parameters": {
+    "DeploymentID": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "SubID": "[subscription().subscriptionId]",
+    "publishingUsername": "[concat('$',parameters('DeploymentID'))]",
+    "location": "[resourceGroup().location]",
+    "projectname": "[concat('devproject-',parameters('DeploymentID'))]",
+    "rgname": "[resourceGroup().name]",
+    "devCenterId": "[resourceId(resourceGroup().name,'Microsoft.DevCenter/devcenters',variables('devcentername'))]",
+    "devcentername": "[concat('devcenter-',parameters('DeploymentID'))]",
+    "devboxvnet": "devboxvnet",
+    "devboxsubnet": "devboxsubnet",
+    "subnetPrefix": "10.1.0.0/24",
+    "addressPrefix": "10.1.0.0/16",
+    "netconnectionname": "fabrikam-connection",
+    "vnetId1": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('devboxvnet'))]",
+    "devboxsubnetid": "[concat(variables('vnetId1'), '/subnets/', variables('devboxsubnet'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2017-04-01",
+      "name": "[variables('devboxvnet')]",
+      "location": "[variables('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('addressPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('devboxsubnet')]",
+            "properties": {
+              "addressPrefix": "[variables('subnetPrefix')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.DevCenter/devcenters",
+      "apiVersion": "2022-08-01-preview",
+      "name": "[variables('devcentername')]",
+      "location": "[variables('location')]",
+      "identity": {
+        "type": "none"
+      }
+    },
+    {
+      "type": "Microsoft.DevCenter/networkconnections",
+      "apiVersion": "2022-08-01-preview",
+      "name": "[variables('netconnectionname')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/virtualNetworks/', variables('devboxvnet'))]"
+      ],
+      "location": "[variables('location')]",
+ 
+      "properties": {
+        "domainJoinType": "AzureADJoin",
+        "subnetId": "[variables('devboxsubnetid')]"
+      }
+    },
+    {
+      "name": "[variables('projectname')]",
+      "apiVersion": "2022-08-01-preview",
+      "location": "[variables('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.DevCenter/devcenters/', variables('devcentername'))]"
+      ],
+      "type": "Microsoft.DevCenter/projects",
+      "properties": {
+        "devCenterId": "[variables('devCenterId')]"
+      }
+    }
+  ]
+}
