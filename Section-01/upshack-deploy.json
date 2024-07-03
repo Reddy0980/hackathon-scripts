@@ -1,84 +1,180 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "apiProfile": "2020-09-01-hybrid",
-  "parameters": {
-    "DeploymentID": {
-      "type": "string"
-    }
-  },
-  "variables": {
-    "SubID": "[subscription().subscriptionId]",
-    "publishingUsername": "[concat('$',parameters('DeploymentID'))]",
-    "location": "[resourceGroup().location]",
-    "projectname": "[concat('devproject-',parameters('DeploymentID'))]",
-    "rgname": "[resourceGroup().name]",
-    "devCenterId": "[resourceId(resourceGroup().name,'Microsoft.DevCenter/devcenters',variables('devcentername'))]",
-    "devcentername": "[concat('devcenter-',parameters('DeploymentID'))]",
-    "devboxvnet": "devboxvnet",
-    "devboxsubnet": "devboxsubnet",
-    "subnetPrefix": "10.1.0.0/24",
-    "addressPrefix": "10.1.0.0/16",
-    "netconnectionname": "fabrikam-connection",
-    "vnetId1": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('devboxvnet'))]",
-    "devboxsubnetid": "[concat(variables('vnetId1'), '/subnets/', variables('devboxsubnet'))]"
-  },
-  "resources": [
-    {
-      "type": "Microsoft.Network/virtualNetworks",
-      "apiVersion": "2017-04-01",
-      "name": "[variables('devboxvnet')]",
-      "location": "[variables('location')]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[variables('addressPrefix')]"
-          ]
-        },
-        "subnets": [
-          {
-            "name": "[variables('devboxsubnet')]",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "DeploymentID": {
+            "type": "String"
+        }
+    },
+    "variables": {
+        "SubID": "[subscription().subscriptionId]",
+        "publishingUsername": "[concat('$', parameters('DeploymentID'))]",
+        "location": "[resourceGroup().location]",
+        "projectname": "[concat('devproject-', parameters('DeploymentID'))]",
+        "rgname": "[resourceGroup().name]",
+        "devcentername": "[concat('devcenter-', parameters('DeploymentID'))]",
+        "devboxvnet": "devboxvnet",
+        "devboxsubnet": "devboxsubnet",
+        "subnetPrefix": "10.1.0.0/24",
+        "addressPrefix": "10.1.0.0/16",
+        "netconnectionname": "fabrikam-connection",
+        "vnetId1": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', variables('devboxvnet'))]",
+        "devboxsubnetid": "[concat(variables('vnetId1'), '/subnets/', variables('devboxsubnet'))]",
+        "networkConnectionExternalId": "[resourceId(resourceGroup().name, 'Microsoft.DevCenter/networkconnections', variables('netconnectionname'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2017-04-01",
+            "name": "[variables('devboxvnet')]",
+            "location": "[variables('location')]",
             "properties": {
-              "addressPrefix": "[variables('subnetPrefix')]"
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[variables('addressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[variables('devboxsubnet')]",
+                        "properties": {
+                            "addressPrefix": "[variables('subnetPrefix')]"
+                        }
+                    }
+                ]
             }
-          }
-        ]
-      }
-    },
-    {
-      "type": "Microsoft.DevCenter/devcenters",
-      "apiVersion": "2022-08-01-preview",
-      "name": "[variables('devcentername')]",
-      "location": "[variables('location')]",
-      "identity": {
-        "type": "none"
-      }
-    },
-    {
-      "type": "Microsoft.DevCenter/networkconnections",
-      "apiVersion": "2022-08-01-preview",
-      "name": "[variables('netconnectionname')]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/', variables('devboxvnet'))]"
-      ],
-      "location": "[variables('location')]",
- 
-      "properties": {
-        "domainJoinType": "AzureADJoin",
-        "subnetId": "[variables('devboxsubnetid')]"
-      }
-    },
-    {
-      "name": "[variables('projectname')]",
-      "apiVersion": "2022-08-01-preview",
-      "location": "[variables('location')]",
-      "dependsOn": [
-        "[concat('Microsoft.DevCenter/devcenters/', variables('devcentername'))]"
-      ],
-      "type": "Microsoft.DevCenter/projects",
-      "properties": {
-        "devCenterId": "[variables('devCenterId')]"
-      }
-    }
-  ]
+        },
+        {
+            "type": "Microsoft.DevCenter/devcenters",
+            "apiVersion": "2024-05-01-preview",
+            "name": "[variables('devcentername')]",
+            "location": "[variables('location')]",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "projectCatalogSettings": {
+                    "catalogItemSyncEnableStatus": "Enabled"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.DevCenter/networkconnections",
+            "apiVersion": "2022-08-01-preview",
+            "name": "[variables('netconnectionname')]",
+            "location": "[variables('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('devboxvnet'))]",
+                "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]"
+            ],
+            "properties": {
+                "domainJoinType": "AzureADJoin",
+                "subnetId": "[variables('devboxsubnetid')]"
+            }
+        },
+        {
+            "type": "Microsoft.DevCenter/devcenters/attachednetworks",
+            "apiVersion": "2024-05-01-preview",
+            "name": "[concat(variables('devcentername'), '/fabrikam-connection')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]",
+                "[resourceId('Microsoft.DevCenter/networkconnections', variables('netconnectionname'))]"
+            ],
+            "properties": {
+                "networkConnectionId": "[variables('networkConnectionExternalId')]"
+            }
+        },
+        {
+            "type": "Microsoft.DevCenter/devcenters/catalogs",
+            "apiVersion": "2024-05-01-preview",
+            "name": "[concat(variables('devcentername'), '/catalog')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]"
+            ],
+            "properties": {
+                "gitHub": {
+                    "uri": "https://github.com/garyciampa/devcenter-catalog.git"
+                },
+                "syncType": "Scheduled"
+            }
+        },
+        {
+            "type": "Microsoft.DevCenter/devcenters/devboxdefinitions",
+            "apiVersion": "2024-05-01-preview",
+            "name": "[concat(variables('devcentername'), '/DevBox')]",
+            "location": "[variables('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]",
+                "[resourceId('Microsoft.DevCenter/devcenters/attachednetworks', variables('devcentername'), 'fabrikam-connection')]"
+            ],
+            "properties": {
+                "imageReference": {
+                    "id": "[concat('/subscriptions/', variables('SubID'), '/resourceGroups/', variables('rgname'), '/providers/Microsoft.DevCenter/devcenters/', variables('devcentername'), '/galleries/default/images/microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2')]"
+                },
+                "sku": {
+                    "name": "general_i_8c32gb512ssd_v2"
+                },
+                "hibernateSupport": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.DevCenter/projects",
+            "apiVersion": "2024-05-01-preview",
+            "name": "[variables('projectname')]",
+            "location": "[variables('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]",
+                "[resourceId('Microsoft.DevCenter/devcenters/devboxdefinitions', variables('devcentername'), 'DevBox')]"
+            ],
+            "tags": {
+                "hidden-title": "dev-project"
+            },
+            "properties": {
+                "devCenterId": "[concat('/subscriptions/', variables('SubID'), '/resourceGroups/', variables('rgname'), '/providers/Microsoft.DevCenter/devcenters/', variables('devcentername'))]",
+                "displayName": "[variables('projectname')]",
+                "catalogSettings": {
+                    "catalogItemSyncTypes": [
+                        "EnvironmentDefinition"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.DevCenter/projects/pools",
+            "apiVersion": "2024-05-01-preview",
+            "name": "[concat(variables('projectname'), '/dev-box-pool')]",
+            "location": "[variables('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.DevCenter/projects', variables('projectname'))]"
+            ],
+            "tags": {
+                "hidden-title": "dev-box-pool-test"
+            },
+            "properties": {
+                "devBoxDefinitionName": "DevBox",
+                "networkConnectionName": "[variables('netconnectionname')]",
+                "licenseType": "Windows_Client",
+                "localAdministrator": "Enabled",
+                "singleSignOnStatus": "Enabled",
+                "displayName": "dev-box-pool",
+                "virtualNetworkType": "Unmanaged"
+            }
+        },
+        {
+            "type": "Microsoft.DevCenter/projects/pools/schedules",
+            "apiVersion": "2024-05-01-preview",
+            "name": "[concat(variables('projectname'), '/dev-box-pool/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.DevCenter/projects/pools', variables('projectname'), 'dev-box-pool')]",
+                "[resourceId('Microsoft.DevCenter/projects', variables('projectname'))]"
+            ],
+            "properties": {
+                "type": "StopDevBox",
+                "frequency": "Daily",
+                "time": "19:00",
+                "timeZone": "America/New_York",
+                "state": "Enabled"
+            }
+        }
+    ]
 }
