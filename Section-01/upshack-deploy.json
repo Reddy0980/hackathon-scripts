@@ -22,7 +22,6 @@
         "devboxsubnetid": "[concat(variables('vnetId1'), '/subnets/', variables('devboxsubnet'))]",
         "networkConnectionExternalId": "[resourceId(resourceGroup().name, 'Microsoft.DevCenter/networkconnections', variables('netconnectionname'))]"
     },
-    
     "resources": [
         {
             "type": "Microsoft.Network/virtualNetworks",
@@ -85,20 +84,20 @@
                 "networkConnectionId": "[variables('networkConnectionExternalId')]"
             }
         },
-         {
-    "type": "Microsoft.DevCenter/devcenters/catalogs",
-    "apiVersion": "2024-05-01-preview",
-    "name": "[concat(variables('devcentername'), '/catalog')]",
-    "dependsOn": [
-        "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]"
-    ],
-    "properties": {
-        "gitHub": {
-            "uri": "https://github.com/microsoft/devcenter-catalog.git"
+        {
+            "type": "Microsoft.DevCenter/devcenters/catalogs",
+            "apiVersion": "2024-05-01-preview",
+            "name": "[concat(variables('devcentername'), '/catalog')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]"
+            ],
+            "properties": {
+                "gitHub": {
+                    "uri": "https://github.com/garyciampa/devcenter-catalog.git"
+                },
+                "syncType": "Scheduled"
+            }
         },
-        "syncType": "Scheduled"
-    }
-},
         {
             "type": "Microsoft.DevCenter/devcenters/devboxdefinitions",
             "apiVersion": "2024-05-01-preview",
