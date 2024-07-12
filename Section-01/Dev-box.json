@@ -9,52 +9,25 @@
     "variables": {
         "SubID": "[subscription().subscriptionId]",
         "publishingUsername": "[concat('$', parameters('DeploymentID'))]",
-        "locationCentralUS": "Central US",
-        "locationCentralIndia": "Central India",
+        "location": "[resourceGroup().location]",
         "projectname": "[concat('devproject-', parameters('DeploymentID'))]",
         "rgname": "[resourceGroup().name]",
         "devcentername": "[concat('devcenter-', parameters('DeploymentID'))]",
-        "devboxvnetCentralUS": "devboxvnet-centralus",
-        "devboxvnetCentralIndia": "devboxvnet-centralindia",
+        "devboxvnet": "devboxvnet",
         "devboxsubnet": "devboxsubnet",
         "subnetPrefix": "10.1.0.0/24",
         "addressPrefix": "10.1.0.0/16",
-        "netconnectionnameCentralUS": "fabrikam-connection-centralus",
-        "netconnectionnameCentralIndia": "fabrikam-connection-centralindia",
-        "vnetIdCentralUS": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', variables('devboxvnetCentralUS'))]",
-        "vnetIdCentralIndia": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', variables('devboxvnetCentralIndia'))]",
-        "devboxsubnetidCentralUS": "[concat(variables('vnetIdCentralUS'), '/subnets/', variables('devboxsubnet'))]",
-        "devboxsubnetidCentralIndia": "[concat(variables('vnetIdCentralIndia'), '/subnets/', variables('devboxsubnet'))]",
-        "networkConnectionExternalIdCentralUS": "[resourceId(resourceGroup().name, 'Microsoft.DevCenter/networkconnections', variables('netconnectionnameCentralUS'))]",
-        "networkConnectionExternalIdCentralIndia": "[resourceId(resourceGroup().name, 'Microsoft.DevCenter/networkconnections', variables('netconnectionnameCentralIndia'))]"
+        "netconnectionname": "fabrikam-connection",
+        "vnetId1": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', variables('devboxvnet'))]",
+        "devboxsubnetid": "[concat(variables('vnetId1'), '/subnets/', variables('devboxsubnet'))]",
+        "networkConnectionExternalId": "[resourceId(resourceGroup().name, 'Microsoft.DevCenter/networkconnections', variables('netconnectionname'))]"
     },
     "resources": [
         {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2017-04-01",
-            "name": "[variables('devboxvnetCentralUS')]",
-            "location": "[variables('locationCentralUS')]",
-            "properties": {
-                "addressSpace": {
-                    "addressPrefixes": [
-                        "[variables('addressPrefix')]"
-                    ]
-                },
-                "subnets": [
-                    {
-                        "name": "[variables('devboxsubnet')]",
-                        "properties": {
-                            "addressPrefix": "[variables('subnetPrefix')]"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.Network/virtualNetworks",
-            "apiVersion": "2017-04-01",
-            "name": "[variables('devboxvnetCentralIndia')]",
-            "location": "[variables('locationCentralIndia')]",
+            "name": "[variables('devboxvnet')]",
+            "location": "[variables('location')]",
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -75,7 +48,7 @@
             "type": "Microsoft.DevCenter/devcenters",
             "apiVersion": "2024-05-01-preview",
             "name": "[variables('devcentername')]",
-            "location": "[variables('locationCentralUS')]",
+            "location": "[variables('location')]",
             "identity": {
                 "type": "SystemAssigned"
             },
@@ -88,53 +61,27 @@
         {
             "type": "Microsoft.DevCenter/networkconnections",
             "apiVersion": "2022-08-01-preview",
-            "name": "[variables('netconnectionnameCentralUS')]",
-            "location": "[variables('locationCentralUS')]",
+            "name": "[variables('netconnectionname')]",
+            "location": "[variables('location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', variables('devboxvnetCentralUS'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('devboxvnet'))]",
                 "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]"
             ],
             "properties": {
                 "domainJoinType": "AzureADJoin",
-                "subnetId": "[variables('devboxsubnetidCentralUS')]"
-            }
-        },
-        {
-            "type": "Microsoft.DevCenter/networkconnections",
-            "apiVersion": "2022-08-01-preview",
-            "name": "[variables('netconnectionnameCentralIndia')]",
-            "location": "[variables('locationCentralIndia')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', variables('devboxvnetCentralIndia'))]",
-                "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]"
-            ],
-            "properties": {
-                "domainJoinType": "AzureADJoin",
-                "subnetId": "[variables('devboxsubnetidCentralIndia')]"
+                "subnetId": "[variables('devboxsubnetid')]"
             }
         },
         {
             "type": "Microsoft.DevCenter/devcenters/attachednetworks",
             "apiVersion": "2024-05-01-preview",
-            "name": "[concat(variables('devcentername'), '/fabrikam-connection-centralus')]",
+            "name": "[concat(variables('devcentername'), '/fabrikam-connection')]",
             "dependsOn": [
                 "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]",
-                "[resourceId('Microsoft.DevCenter/networkconnections', variables('netconnectionnameCentralUS'))]"
+                "[resourceId('Microsoft.DevCenter/networkconnections', variables('netconnectionname'))]"
             ],
             "properties": {
-                "networkConnectionId": "[variables('networkConnectionExternalIdCentralUS')]"
-            }
-        },
-        {
-            "type": "Microsoft.DevCenter/devcenters/attachednetworks",
-            "apiVersion": "2024-05-01-preview",
-            "name": "[concat(variables('devcentername'), '/fabrikam-connection-centralindia')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]",
-                "[resourceId('Microsoft.DevCenter/networkconnections', variables('netconnectionnameCentralIndia'))]"
-            ],
-            "properties": {
-                "networkConnectionId": "[variables('networkConnectionExternalIdCentralIndia')]"
+                "networkConnectionId": "[variables('networkConnectionExternalId')]"
             }
         },
         {
@@ -148,17 +95,17 @@
                 "gitHub": {
                     "uri": "https://github.com/garyciampa/devcenter-catalog.git"
                 },
-                "syncType": "Scheduled"
+                "syncType": "Manual"
             }
         },
         {
             "type": "Microsoft.DevCenter/devcenters/devboxdefinitions",
             "apiVersion": "2024-05-01-preview",
             "name": "[concat(variables('devcentername'), '/DevBox')]",
-            "location": "[variables('locationCentralUS')]",
+            "location": "[variables('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]",
-                "[resourceId('Microsoft.DevCenter/devcenters/attachednetworks', variables('devcentername'), 'fabrikam-connection-centralus')]"
+                "[resourceId('Microsoft.DevCenter/devcenters/attachednetworks', variables('devcentername'), 'fabrikam-connection')]"
             ],
             "properties": {
                 "imageReference": {
@@ -174,7 +121,7 @@
             "type": "Microsoft.DevCenter/projects",
             "apiVersion": "2024-05-01-preview",
             "name": "[variables('projectname')]",
-            "location": "[variables('locationCentralUS')]",
+            "location": "[variables('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]",
                 "[resourceId('Microsoft.DevCenter/devcenters/devboxdefinitions', variables('devcentername'), 'DevBox')]"
@@ -195,69 +142,30 @@
         {
             "type": "Microsoft.DevCenter/projects/pools",
             "apiVersion": "2024-05-01-preview",
-            "name": "[concat(variables('projectname'), '/dev-box-pool-centralus')]",
-            "location": "[variables('locationCentralUS')]",
+            "name": "[concat(variables('projectname'), '/dev-box-pool')]",
+            "location": "[variables('location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.DevCenter/projects', variables('projectname'))]",
-                "[resourceId('Microsoft.DevCenter/devcenters/attachednetworks', variables('devcentername'), 'fabrikam-connection-centralus')]"
-            ],
-            "tags": {
-                "hidden-title": "dev-box-pool"
-            },
-            "properties": {
-                "devBoxDefinitionName": "DevBox",
-                "networkConnectionName": "[variables('netconnectionnameCentralUS')]",
-                "licenseType": "Windows_Client",
-                "localAdministrator": "Enabled",
-                "singleSignOnStatus": "Enabled",
-                "displayName": "dev-box-pool-centralus",
-                "virtualNetworkType": "Unmanaged"
-            }
-        },
-        {
-            "type": "Microsoft.DevCenter/projects/pools",
-            "apiVersion": "2024-05-01-preview",
-            "name": "[concat(variables('projectname'), '/dev-box-pool-centralindia')]",
-            "location": "[variables('locationCentralUS')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.DevCenter/projects', variables('projectname'))]",
-                "[resourceId('Microsoft.DevCenter/devcenters/attachednetworks', variables('devcentername'), 'fabrikam-connection-centralindia')]"
+                "[resourceId('Microsoft.DevCenter/projects', variables('projectname'))]"
             ],
             "tags": {
                 "hidden-title": "dev-box-pool-test"
             },
             "properties": {
                 "devBoxDefinitionName": "DevBox",
-                "networkConnectionName": "[variables('netconnectionnameCentralIndia')]",
+                "networkConnectionName": "[variables('netconnectionname')]",
                 "licenseType": "Windows_Client",
                 "localAdministrator": "Enabled",
                 "singleSignOnStatus": "Enabled",
-                "displayName": "dev-box-pool-centralindia",
+                "displayName": "dev-box-pool",
                 "virtualNetworkType": "Unmanaged"
             }
         },
         {
             "type": "Microsoft.DevCenter/projects/pools/schedules",
             "apiVersion": "2024-05-01-preview",
-            "name": "[concat(variables('projectname'), '/dev-box-pool-centralus/default')]",
+            "name": "[concat(variables('projectname'), '/dev-box-pool/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.DevCenter/projects/pools', variables('projectname'), 'dev-box-pool-centralus')]",
-                "[resourceId('Microsoft.DevCenter/projects', variables('projectname'))]"
-            ],
-            "properties": {
-                "type": "StopDevBox",
-                "frequency": "Daily",
-                "time": "19:00",
-                "timeZone": "America/New_York",
-                "state": "Enabled"
-            }
-        },
-        {
-            "type": "Microsoft.DevCenter/projects/pools/schedules",
-            "apiVersion": "2024-05-01-preview",
-            "name": "[concat(variables('projectname'), '/dev-box-pool-centralindia/default')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.DevCenter/projects/pools', variables('projectname'), 'dev-box-pool-centralindia')]",
+                "[resourceId('Microsoft.DevCenter/projects/pools', variables('projectname'), 'dev-box-pool')]",
                 "[resourceId('Microsoft.DevCenter/projects', variables('projectname'))]"
             ],
             "properties": {
