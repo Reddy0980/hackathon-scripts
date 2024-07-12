@@ -94,15 +94,9 @@
     ],
     "properties": {
         "gitHub": {
-            "uri": "https://github.com/garyciampa/devcenter-catalog.git",
-            "branch": "main", 
-            "authentication": {
-                "type": "PAT", 
-                "token": "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" 
-            }
+            "uri": "https://github.com/microsoft/devcenter-catalog.git"
         },
-        "syncType": "Scheduled",
-        "syncInterval": "Daily" 
+        "syncType": "Scheduled"
     }
 },
         {
