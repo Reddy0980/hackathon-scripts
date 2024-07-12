@@ -22,6 +22,7 @@
         "devboxsubnetid": "[concat(variables('vnetId1'), '/subnets/', variables('devboxsubnet'))]",
         "networkConnectionExternalId": "[resourceId(resourceGroup().name, 'Microsoft.DevCenter/networkconnections', variables('netconnectionname'))]"
     },
+    
     "resources": [
         {
             "type": "Microsoft.Network/virtualNetworks",
