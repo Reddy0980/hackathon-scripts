@@ -50,12 +50,7 @@
             "name": "[variables('devcentername')]",
             "location": "[variables('location')]",
             "identity": {
-                "type": "SystemAssigned"
-            },
-            "properties": {
-                "projectCatalogSettings": {
-                    "catalogItemSyncEnableStatus": "Enabled"
-                }
+                "type": "none"
             }
         },
         {
@@ -82,20 +77,6 @@
             ],
             "properties": {
                 "networkConnectionId": "[variables('networkConnectionExternalId')]"
-            }
-        },
-        {
-            "type": "Microsoft.DevCenter/devcenters/catalogs",
-            "apiVersion": "2024-05-01-preview",
-            "name": "[concat(variables('devcentername'), '/catalog')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]"
-            ],
-            "properties": {
-                "gitHub": {
-                    "uri": "https://github.com/garyciampa/devcenter-catalog.git"
-                },
-                "syncType": "Scheduled"
             }
         },
         {
