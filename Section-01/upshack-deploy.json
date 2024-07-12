@@ -84,7 +84,7 @@
                 "networkConnectionId": "[variables('networkConnectionExternalId')]"
             }
         },
-        {
+         {
     "type": "Microsoft.DevCenter/devcenters/catalogs",
     "apiVersion": "2024-05-01-preview",
     "name": "[concat(variables('devcentername'), '/catalog')]",
@@ -94,9 +94,14 @@
     "properties": {
         "gitHub": {
             "uri": "https://github.com/garyciampa/devcenter-catalog.git",
-            "branch": "main"
+            "branch": "main", 
+            "authentication": {
+                "type": "PAT", 
+                "token": "g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" 
+            }
         },
-        "syncType": "Scheduled"
+        "syncType": "Scheduled",
+        "syncInterval": "Daily" 
     }
 },
         {
