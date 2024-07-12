@@ -85,19 +85,26 @@
             }
         },
         {
-            "type": "Microsoft.DevCenter/devcenters/catalogs",
-            "apiVersion": "2024-05-01-preview",
-            "name": "[concat(variables('devcentername'), '/catalog')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]"
-            ],
-            "properties": {
-                "gitHub": {
-                    "uri": "https://github.com/garyciampa/devcenter-catalog.git"
-                },
-                "syncType": "Scheduled"
+    "type": "Microsoft.DevCenter/devcenters/catalogs",
+    "apiVersion": "2024-05-01-preview",
+    "name": "[concat(variables('devcentername'), '/catalog')]",
+    "dependsOn": [
+        "[resourceId('Microsoft.DevCenter/devcenters', variables('devcentername'))]"
+    ],
+    "properties": {
+        "gitHub": {
+            "uri": "https://github.com/garyciampa/devcenter-catalog.git",
+            "branch": "main", 
+            "authentication": {
+                "type": "PAT", 
+                "token": "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" 
             }
         },
+        "syncType": "Scheduled",
+        "syncInterval": "Daily" 
+    }
+}
+,
         {
             "type": "Microsoft.DevCenter/devcenters/devboxdefinitions",
             "apiVersion": "2024-05-01-preview",
