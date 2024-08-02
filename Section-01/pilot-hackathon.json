@@ -2,6 +2,68 @@
   "if": {
     "anyOf": [
       {
+        "not": {
+          "anyOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.ApiManagement/service/*"
+            },
+            {
+              "field": "type",
+              "equals": "Microsoft.EventHub/namespaces/*"
+            },
+            {
+              "field": "type",
+              "equals": "Microsoft.ServiceBus/namespaces/*"
+            },
+              {
+                "field": "type",
+                "equals": "Microsoft.Compute/virtualMachines/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.Cache/Redis/*"
+              },
+              {
+                "field": "type",
+                "equals": "Microsoft.Databricks/workspaces/*"
+              },
+            {
+              "field": "type",
+              "in": [
+                "Microsoft.ApiManagement/service",
+                "Microsoft.EventHub/namespaces",
+                "Microsoft.ServiceBus/namespaces",
+                "Microsoft.Cache/Redis",
+                "Microsoft.Compute/virtualMachines",
+                "Microsoft.Databricks/workspaces"
+
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "allOf": [
+          {
+            "source": "action",
+            "equals": "Microsoft.Synapse/workspaces/write"
+          },
+          {
+            "field": "type",
+            "equals": "Microsoft.Synapse/workspaces"
+          },
+          {
+            "source": "action",
+            "equals": "Microsoft.Purview/accounts/write"
+          },
+          {
+            "field": "type",
+            "equals": "Microsoft.Purview/accounts"
+          }
+        ]
+      },
+      {
         "allOf": [
           {
             "field": "type",
@@ -88,7 +150,19 @@
             }
           }
         ]
-      }
+      },
+        {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Databricks/workspaces"
+            },
+            {
+              "field": "Microsoft.Databricks/workspaces/sku.name",
+              "notEquals": "standard"
+            }
+          ]
+        }
     ]
   },
   "then": {
