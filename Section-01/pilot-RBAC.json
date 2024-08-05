@@ -52,6 +52,24 @@
           }
         ]
       },
+              {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Search/searchServices"
+            },
+            {
+              "not": {
+                "field": "Microsoft.Search/searchServices/sku.name",
+                "in": [
+                         "free",
+                          "basic",
+                         "standard"
+                ]
+              }
+            }
+          ]
+        },
       {
         "allOf": [
           {
