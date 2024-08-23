@@ -12,12 +12,30 @@
               "field": "Microsoft.ApiManagement/service/sku.name",
               "in": [
                 "Standard",
+                "Developer",
                 "Basic"
               ]
             }
           }
         ]
       },
+      {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.CognitiveServices/accounts"
+            },
+            {
+              "not": {
+                "field": "Microsoft.CognitiveServices/accounts/sku.name",
+                "in": [
+                  "Standard",
+                  "GlobalStandard"
+                ]
+              }
+            }
+          ]
+        },
       {
         "allOf": [
           {
