@@ -30,6 +30,7 @@
                 "field": "Microsoft.CognitiveServices/accounts/sku.name",
                 "in": [
                   "Standard",
+                  "S0",
                   "GlobalStandard"
                 ]
               }
