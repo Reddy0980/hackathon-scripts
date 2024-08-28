@@ -30,8 +30,24 @@
                 "field": "Microsoft.CognitiveServices/accounts/sku.name",
                 "in": [
                   "Standard",
-                  "S0",
-                  "GlobalStandard"
+                  "S0"
+                ]
+              }
+            }
+          ]
+        },
+            {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.CognitiveServices/accounts/deployments"
+            },
+            {
+              "not": {
+                "field": "Microsoft.CognitiveServices/accounts/deployments/sku.name",
+                "in": [
+                  "Standard",
+               "GlobalStandard"
                 ]
               }
             }
