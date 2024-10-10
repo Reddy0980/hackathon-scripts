@@ -19,24 +19,7 @@
           }
         ]
       },
-      {
-          "allOf": [
-            {
-              "field": "type",
-              "equals": "Microsoft.CognitiveServices/accounts"
-            },
-            {
-              "not": {
-                "field": "Microsoft.CognitiveServices/accounts/sku.name",
-                "in": [
-                  "Standard",
-                  "S0"
-                ]
-              }
-            }
-          ]
-        },
-            {
+       {
           "allOf": [
             {
               "field": "type",
