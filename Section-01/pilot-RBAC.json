@@ -57,6 +57,22 @@
         "allOf": [
           {
             "field": "type",
+            "equals": "Microsoft.Fabric/capacities"
+          },
+          {
+            "not": {
+              "field": "Microsoft.Fabric/capacities/sku.name",
+              "in": [
+                "F64"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "allOf": [
+          {
+            "field": "type",
             "equals": "Microsoft.ServiceBus/namespaces"
           },
           {
