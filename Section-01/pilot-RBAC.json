@@ -63,7 +63,8 @@
             "not": {
               "field": "Microsoft.Fabric/capacities/sku.name",
               "in": [
-                "F64"
+                "F64",
+                "F128"
               ]
             }
           }
