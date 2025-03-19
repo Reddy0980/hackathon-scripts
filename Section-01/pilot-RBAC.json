@@ -185,14 +185,6 @@
         "allOf": [
           {
             "field": "type",
-            "equals": "Microsoft.Fabric/capacities"
-          }
-        ]
-      },
-      {
-        "allOf": [
-          {
-            "field": "type",
             "equals": "Microsoft.Security/sentinel"
           }
         ]
