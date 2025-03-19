@@ -220,22 +220,6 @@
             "equals": "Microsoft.RecoveryServices/vaults"
           }
         ]
-      },
-      {
-        "allOf": [
-          {
-            "field": "type",
-            "equals": "Microsoft.ServiceFabric/clusters"
-          }
-        ]
-      },
-      {
-        "allOf": [
-          {
-            "field": "type",
-            "equals": "Microsoft.RecoveryServices/vaults/backupFabrics"
-          }
-        ]
       }
     ]
   },
