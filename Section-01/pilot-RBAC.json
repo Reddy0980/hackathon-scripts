@@ -105,6 +105,30 @@
           }
         ]
       },
+   {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.ServiceFabric/clusters"
+          }
+        ]
+      },
+      {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.RecoveryServices/vaults/backupFabrics"
+          }
+        ]
+      },
+    {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Fabric/capacities"
+          }
+        ]
+      },
       {
         "allOf": [
           {
