@@ -10,7 +10,7 @@
         "SubID": "[subscription().subscriptionId]",
         "publishingUsername": "[concat('$', parameters('DeploymentID'))]",
         "location": "[resourceGroup().location]",
-        "projectname": "[concat('devproject-', parameters('DeploymentID'))]",
+        "projectname": "[concat('devproject-', parameters('Hackathon'))]",
         "rgname": "[resourceGroup().name]",
         "devcentername": "[concat('devcenter-', parameters('DeploymentID'))]",
         "devboxvnet": "devboxvnet",
